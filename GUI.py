@@ -42,6 +42,9 @@ weaponAPEntry = tkinter.Entry(root)
 weaponALabel = tkinter.Label(root, text = '# of shots')
 weaponAEntry = tkinter.Entry(root)
 
+weaponDamageLabel = tkinter.Label(root, text = "Damage")
+weaponDamageEntry = tkinter.Entry(root)
+
  
 
 def rerollSelect():
@@ -55,6 +58,14 @@ RR3 = tkinter.Radiobutton(root, text = "No re-rolls to-hit", variable = var, val
 
 poisonVar = tkinter.IntVar()
 Poison = tkinter.Checkbutton(root, text = "Poison attack", variable = poisonVar, onvalue = 1, offvalue = 0)   
+
+def rerollWoundSelect():
+    sel = var2.get()
+
+var2 = tkinter.IntVar()
+RRW1 = tkinter.Radiobutton(root, text = "Re-roll to wound 1's", variable = var2, value = 1, command = rerollWoundSelect) 
+RRW2 = tkinter.Radiobutton(root, text = "Re-roll all to wound", variable = var2, value = 2, command = rerollWoundSelect) 
+RRW3 = tkinter.Radiobutton(root, text = "No re-rolls to wound", variable = var2, value = 3, command = rerollWoundSelect) 
     
  
 def printWeaponData():
@@ -97,9 +108,17 @@ weaponAPEntry.pack()
  
 weaponALabel.pack()
 weaponAEntry.pack()
+
+weaponDamageLabel.pack()
+weaponDamageEntry.pack()
+
 RR1.pack()
 RR2.pack()
 RR3.pack()
+
+RRW1.pack()
+RRW2.pack()
+RRW3.pack()
 
 Poison.pack()
 
