@@ -2,11 +2,12 @@ import tkinter as tk
 
 root = tk.Tk()
 
-labels1 = ["Unit name", "Wounds", "Toughness", "Model count", "Armor save", "Inv. save"]
+labels1 = ["Unit name", "Wounds", "Toughness", "Model count", "Armor save", "Inv. save", "FnP"]
 labels2 = ["Weapon name", "Damage", "Strength", "Model count", "Armor piercing", "No. of attacks"]
 labels3 = ["Print unit data", "Print attack data", "Calculate result"]
 labels4 = ["Re-roll to hit 1's", "Re-roll to hit all", "No to hit re-rolls"]
 labels5 = ["Re-roll to wound 1's", "Re-roll to wound all", "No to wound re-rolls"]
+labels6 = ["Poison attack"]
 
 r = 0
 for label in labels1:
@@ -22,7 +23,7 @@ for label in labels2:
 
 r3 = 0
 for label in labels3:
-    tk.Button(text = label).grid(row = 9, column = r3)
+    tk.Button(text = label).grid(row = 10, column = r3)
     r3 = r3 +1
 
 var = tk.IntVar()
@@ -34,8 +35,6 @@ for label in labels4:
     r4 = r4 +1
     
 
-
-
 var1 = tk.IntVar()
 r5 = 0
 value2 = 1
@@ -44,4 +43,8 @@ for label in labels5:
     value2 = value2 +1
     r5 = r5 +1
     
+poisonVar = tk.IntVar()    
+tk.Checkbutton(text = "Poison attack", variable = poisonVar, onvalue = 1, offvalue = 0).grid(row = 8, column = 3)  
+
+
 root.mainloop()
