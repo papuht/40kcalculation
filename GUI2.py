@@ -20,27 +20,60 @@ labels6 = ["Poison attack"]
 r = 0
 for label in labels1:
     tk.Label(text = label).grid(row = r, column = 0)
-    tk.Entry().grid(row = r, column = 1)
     r = r +1
+
+unameVar = tk.StringVar()
+woundVar = tk.StringVar()
+toughVar = tk.StringVar()
+dmcVar = tk.StringVar()
+asVar = tk.StringVar()
+isVar = tk.StringVar()
+fnpVar = tk.StringVar()
+
+unameEntry = tk.Entry(textvariable = unameVar).grid(row = 0, column = 1)
+woundEntry = tk.Entry(textvariable = woundVar).grid(row = 1, column = 1)
+toughEntry =tk.Entry(textvariable = toughVar).grid(row = 2, column = 1)
+dmcEntry =tk.Entry(textvariable = dmcVar).grid(row = 3, column = 1)
+asEntry =tk.Entry(textvariable = asVar).grid(row = 4, column = 1)
+isEntry = tk.Entry(textvariable = isVar).grid(row = 5, column = 1)
+fnpEntry = tk.Entry(textvariable = fnpVar).grid(row = 6, column = 1)
 
 r2 = 0    
 for label in labels2:
     tk.Label(text = label).grid(row = r2, column = 2)
     r2 = r2 +1
 
+wnameVar = tk.StringVar()
+damaVar = tk.StringVar()
+strVar = tk.StringVar()
+apVar = tk.StringVar()
 mcVar = tk.StringVar()
 attVar = tk.StringVar()
 bsVar = tk.StringVar()
 
-wnameEntry = tk.Entry().grid(row = 0, column = 3)
-damaEntry = tk.Entry().grid(row = 1, column = 3)
-strEntry = tk.Entry().grid(row = 2, column = 3)
+wnameEntry = tk.Entry(textvariable = wnameVar).grid(row = 0, column = 3)
+damaEntry = tk.Entry(textvariable = damaVar).grid(row = 1, column = 3)
+strEntry = tk.Entry(textvariable = strVar).grid(row = 2, column = 3)
 mcEntry = tk.Entry(textvariable = mcVar).grid(row = 3, column = 3)
-apEntry = tk.Entry().grid(row = 4, column = 3)
+apEntry = tk.Entry(textvariable = apVar).grid(row = 4, column = 3)
 noAtEntry = tk.Entry(textvariable = attVar).grid(row = 5, column = 3)
 bsEntry = tk.Entry(textvariable = bsVar).grid(row = 6, column = 3)
     
 def calculateButtonCB():
+    defendName = unameVar.get()
+    wounds = float(woundVar.get())
+    toughness = float(toughVar.get())
+    dmc = float(dmcVar.get())
+    armor = float(asVar.get())
+    invu = float(isVar.get())
+    fnp = float(fnpVar.get())
+
+
+
+    wname = wnameVar.get()
+    damage = float(damaVar.get())
+    str = float(strVar.get())
+    ap = float(apVar.get())
     bs = float(bsVar.get())
     att = float(attVar.get())
     mc = float(mcVar.get())
