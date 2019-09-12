@@ -1,9 +1,17 @@
 import tkinter as tk
+import calculation
+import attacker
+
+
+        
+
 
 root = tk.Tk()
 
+
+
 labels1 = ["Unit name", "Wounds", "Toughness", "Model count", "Armor save", "Inv. save", "FnP"]
-labels2 = ["Weapon name", "Damage", "Strength", "Model count", "Armor piercing", "No. of attacks"]
+labels2 = ["Weapon name", "Damage", "Strength", "Model count", "Armor piercing", "No. of attacks", "Ballistic skill"]
 labels3 = ["Print unit data", "Print attack data", "Calculate result"]
 labels4 = ["Re-roll to hit 1's", "Re-roll to hit all", "No to hit re-rolls"]
 labels5 = ["Re-roll to wound 1's", "Re-roll to wound all", "No to wound re-rolls"]
@@ -18,13 +26,34 @@ for label in labels1:
 r2 = 0    
 for label in labels2:
     tk.Label(text = label).grid(row = r2, column = 2)
-    tk.Entry().grid(row = r2, column = 3)
     r2 = r2 +1
 
-r3 = 0
-for label in labels3:
-    tk.Button(text = label).grid(row = 10, column = r3)
-    r3 = r3 +1
+mcVar = tk.StringVar()
+attVar = tk.StringVar()
+bsVar = tk.StringVar()
+
+wnameEntry = tk.Entry().grid(row = 0, column = 3)
+damaEntry = tk.Entry().grid(row = 1, column = 3)
+strEntry = tk.Entry().grid(row = 2, column = 3)
+mcEntry = tk.Entry(textvariable = mcVar).grid(row = 3, column = 3)
+apEntry = tk.Entry().grid(row = 4, column = 3)
+noAtEntry = tk.Entry(textvariable = attVar).grid(row = 5, column = 3)
+bsEntry = tk.Entry(textvariable = bsVar).grid(row = 6, column = 3)
+    
+def calculateButtonCB():
+    bs = float(bsVar.get())
+    att = float(attVar.get())
+    mc = float(mcVar.get())
+    
+    att = attacker.Attacker(bs, att, mc)
+    print(calculation.calculateHits(att.getBS(), att.getAtt(), att.getMC()))
+    
+
+
+
+
+
+  
 
 var = tk.IntVar()
 r4 = 0
@@ -45,6 +74,8 @@ for label in labels5:
     
 poisonVar = tk.IntVar()    
 tk.Checkbutton(text = "Poison attack", variable = poisonVar, onvalue = 1, offvalue = 0).grid(row = 8, column = 3)  
+calculateButton = tk.Button(text = "Calculate hits", command = calculateButtonCB).grid(row = 11, column = 1)
+
 
 
 root.mainloop()
