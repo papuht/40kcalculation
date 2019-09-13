@@ -19,4 +19,18 @@ def calculateHits(bs, attacks, amodels):
     return numberOfHits
                    
     
+def calculateWounds(numofhits, str, tough):
+    if str == tough:
+        chanceToWound = float(1/2)
+    elif (str - tough) == 1:
+        chanceToWound = float(2/3)
+    elif (str - tough) == -1:
+        chanceToWound = float(1/3)
+    elif str >= (2*tough): 
+        chanceToWound = float(5/6)
+    elif tough >= (2*str):
+        chanceToWound = float(1/6)
         
+    numberOfWounds = float(numofhits * chanceToWound)
+     
+    return numberOfWounds

@@ -1,5 +1,9 @@
 class Attacker:
-    def __init__(self, bs, attacks, mc):
+    def __init__(self, name, str, damage, ap, bs, attacks, mc):
+        #self.name = name;   #Asetettu komenteiksi toistaiseksi jotta eivät tekisi vielä mitään
+        #self.str = float(str);
+        #self.damage = float(damage);
+        #self.ap = float(ap);
         self.bs = float(bs);
         self.attacks = float(attacks);
         self.mc = float(mc);

@@ -1,14 +1,14 @@
 import tkinter as tk
 import calculation
 import attacker
-
+import defender
 
         
 
 
 root = tk.Tk()
 
-
+# strings for different fields of data
 
 labels1 = ["Unit name", "Wounds", "Toughness", "Model count", "Armor save", "Inv. save", "FnP"]
 labels2 = ["Weapon name", "Damage", "Strength", "Model count", "Armor piercing", "No. of attacks", "Ballistic skill"]
@@ -22,6 +22,7 @@ for label in labels1:
     tk.Label(text = label).grid(row = r, column = 0)
     r = r +1
 
+# variables to store defender data from entries
 unameVar = tk.StringVar()
 woundVar = tk.StringVar()
 toughVar = tk.StringVar()
@@ -43,6 +44,8 @@ for label in labels2:
     tk.Label(text = label).grid(row = r2, column = 2)
     r2 = r2 +1
 
+
+# variables to store attacker data 
 wnameVar = tk.StringVar()
 damaVar = tk.StringVar()
 strVar = tk.StringVar()
@@ -59,7 +62,9 @@ apEntry = tk.Entry(textvariable = apVar).grid(row = 4, column = 3)
 noAtEntry = tk.Entry(textvariable = attVar).grid(row = 5, column = 3)
 bsEntry = tk.Entry(textvariable = bsVar).grid(row = 6, column = 3)
     
-def calculateButtonCB():
+def calculateButtonCB(): # this callback employs the calculation methods and creates objects for calculation 
+
+
     defendName = unameVar.get()
     wounds = float(woundVar.get())
     toughness = float(toughVar.get())
@@ -67,7 +72,8 @@ def calculateButtonCB():
     armor = float(asVar.get())
     invu = float(isVar.get())
     fnp = float(fnpVar.get())
-
+    
+    #defender = defender.DefendingUnit(defendName, wounds, toughness, dmc, armor, invu, fnp)  # asetettu kommenteiksi jotta ei tekisi vielä mitään
 
 
     wname = wnameVar.get()
@@ -78,8 +84,9 @@ def calculateButtonCB():
     att = float(attVar.get())
     mc = float(mcVar.get())
     
-    att = attacker.Attacker(bs, att, mc)
-    print(calculation.calculateHits(att.getBS(), att.getAtt(), att.getMC()))
+    att = attacker.Attacker(wname, str, damage, ap, bs, att, mc)
+    print("Number of hits", calculation.calculateHits(att.getBS(), att.getAtt(), att.getMC()))
+    print("Number of wounds", calculation.calculateWounds(calculation.calculateHits(att.getBS(), att.getAtt(), att.getMC()), str, toughness))
     
 
 
@@ -87,7 +94,7 @@ def calculateButtonCB():
 
 
   
-
+# radiobuttons below are for determining rerolls for calculation 
 var = tk.IntVar()
 r4 = 0
 value = 1
@@ -104,7 +111,8 @@ for label in labels5:
     tk.Radiobutton(text = label, variable = var1, value = value2).grid(row = 8, column = r5) 
     value2 = value2 +1
     r5 = r5 +1
-    
+
+# checkbutton to mark attack as poisoned     
 poisonVar = tk.IntVar()    
 tk.Checkbutton(text = "Poison attack", variable = poisonVar, onvalue = 1, offvalue = 0).grid(row = 8, column = 3)  
 calculateButton = tk.Button(text = "Calculate hits", command = calculateButtonCB).grid(row = 11, column = 1)
