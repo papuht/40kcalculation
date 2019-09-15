@@ -84,10 +84,17 @@ def calculateButtonCB(): # this callback employs the calculation methods and cre
     att = float(attVar.get())
     mc = float(mcVar.get())
     
-    att = attacker.Attacker(wname, str, damage, ap, bs, att, mc)
-    print("Number of hits", calculation.calculateHits(att.getBS(), att.getAtt(), att.getMC()))
-    print("Number of wounds", calculation.calculateWounds(calculation.calculateHits(att.getBS(), att.getAtt(), att.getMC()), str, toughness))
     
+     
+    
+    
+    #att = attacker.Attacker(wname, str, damage, ap, bs, att, mc)
+    print("Number of hits:", calculation.calculateHits(bs, att, mc))
+    Hits = calculation.calculateHits(bs, att, mc)
+    print("Number of wounds:", calculation.calculateWounds(Hits, str, toughness))
+    Wounds = calculation.calculateWounds(Hits, str, toughness)
+    print("Number of succesfull saves:", calculation.calculateSaveType(Wounds, armor, invu, ap))
+    savesMade = calculation.calculateSaveType(Wounds, armor, invu, ap)
 
 
 
