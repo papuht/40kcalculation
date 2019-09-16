@@ -18,7 +18,7 @@ def calculateHits(bs, attacks, amodels, rerollHit):
     misses = float(attacks - numberOfHits)
     
     if rerollHit == 1:
-        totalHits = float(numberOfHits + (misses*(1/6)))
+        totalHits = float(numberOfHits + (misses*float(1/6)))
     elif rerollHit == 2:
         totalHits = float(numberOfHits + (misses * chanceToHit))
     elif rerollHit == 3:
@@ -26,12 +26,16 @@ def calculateHits(bs, attacks, amodels, rerollHit):
     return totalHits
                    
     
-def calculateWounds(numofhits, str, tough):
+def calculateWounds(numofhits, str, tough, rerollWound):
     if str == tough:
         chanceToWound = float(1/2)
-    elif (str - tough) == 1:
+    elif str - tough == 1:
         chanceToWound = float(2/3)
-    elif (str - tough) == -1:
+    elif str - tough == 2:
+        chanceToWound = float(2/3)
+    elif str - tough == -1:
+        chanceToWound = float(1/3)
+    elif str - tough == -2:
         chanceToWound = float(1/3)
     elif str >= (2*tough): 
         chanceToWound = float(5/6)
@@ -39,8 +43,16 @@ def calculateWounds(numofhits, str, tough):
         chanceToWound = float(1/6)
         
     numberOfWounds = float(numofhits * chanceToWound)
+    fails = float(numofhits - numberOfWounds)
+    
+    if rerollWound == 1:
+        totalWounds = float(numberOfWounds + (fails*float(1/6)))
+    elif rerollWound == 2: 
+        totalWounds = float(numberOfWounds + (fails * chanceToWound))
+    elif rerollWound == 3:
+        totalWounds = numberOfWounds
      
-    return numberOfWounds
+    return totalWounds
 
 def normalSave(numofWounds, armor, ap):
 		if (armor + ap) <= 2:
