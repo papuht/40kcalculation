@@ -15,7 +15,7 @@ def calculateHits(bs, attacks, amodels, rerollHit):
         chanceToHit = float(0)
 
     numberOfHits = float(attacks * amodels * chanceToHit)
-    misses = float(attacks - numberOfHits)
+    misses = float((attacks * amodels) - numberOfHits)
     
     if rerollHit == 1:
         totalHits = float(numberOfHits + (misses*float(1/6)))
