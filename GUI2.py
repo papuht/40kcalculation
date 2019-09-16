@@ -53,6 +53,9 @@ apVar = tk.StringVar()
 mcVar = tk.StringVar()
 attVar = tk.StringVar()
 bsVar = tk.StringVar()
+poisonVar = tk.IntVar()
+var = tk.IntVar()
+var1 = tk.IntVar()
 
 wnameEntry = tk.Entry(textvariable = wnameVar).grid(row = 0, column = 3)
 damaEntry = tk.Entry(textvariable = damaVar).grid(row = 1, column = 3)
@@ -83,14 +86,19 @@ def calculateButtonCB(): # this callback employs the calculation methods and cre
     bs = float(bsVar.get())
     att = float(attVar.get())
     mc = float(mcVar.get())
+    poison = poisonVar.get()
+    rerollHit = var.get()
+    rerollWound = var1.get()
     
     
      
     
     
     #att = attacker.Attacker(wname, str, damage, ap, bs, att, mc)
-    print("Number of hits:", calculation.calculateHits(bs, att, mc))
-    Hits = calculation.calculateHits(bs, att, mc)
+    print("Attacking weapon:", wname)
+    print("Target unit:", defendName)
+    print("Number of hits:", calculation.calculateHits(bs, att, mc, rerollHit))
+    Hits = calculation.calculateHits(bs, att, mc, rerollHit)
     print("Number of wounds:", calculation.calculateWounds(Hits, str, toughness))
     Wounds = calculation.calculateWounds(Hits, str, toughness)
     print("Number of succesfull saves:", calculation.calculateSaveType(Wounds, armor, invu, ap))
@@ -105,7 +113,7 @@ def calculateButtonCB(): # this callback employs the calculation methods and cre
 
   
 # radiobuttons below are for determining rerolls for calculation 
-var = tk.IntVar()
+
 r4 = 0
 value = 1
 for label in labels4:
@@ -114,7 +122,7 @@ for label in labels4:
     r4 = r4 +1
     
 
-var1 = tk.IntVar()
+
 r5 = 0
 value2 = 1
 for label in labels5:
@@ -123,7 +131,7 @@ for label in labels5:
     r5 = r5 +1
 
 # checkbutton to mark attack as poisoned     
-poisonVar = tk.IntVar()    
+   
 tk.Checkbutton(text = "Poison attack", variable = poisonVar, onvalue = 1, offvalue = 0).grid(row = 8, column = 3)  
 calculateButton = tk.Button(text = "Calculate hits", command = calculateButtonCB).grid(row = 11, column = 1)
 

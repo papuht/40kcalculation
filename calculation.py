@@ -1,6 +1,6 @@
 
 
-def calculateHits(bs, attacks, amodels):
+def calculateHits(bs, attacks, amodels, rerollHit):
     if bs <= 2:
         chanceToHit = float(5/6)
     elif bs == 3:
@@ -15,8 +15,15 @@ def calculateHits(bs, attacks, amodels):
         chanceToHit = float(0)
 
     numberOfHits = float(attacks * amodels * chanceToHit)
-            
-    return numberOfHits
+    misses = float(attacks - numberOfHits)
+    
+    if rerollHit == 1:
+        totalHits = float(numberOfHits + (misses*(1/6)))
+    elif rerollHit == 2:
+        totalHits = float(numberOfHits + (misses * chanceToHit))
+    elif rerollHit == 3:
+        totalHits = numberOfHits
+    return totalHits
                    
     
 def calculateWounds(numofhits, str, tough):
