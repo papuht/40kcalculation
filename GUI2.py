@@ -95,6 +95,9 @@ def calculateButtonCB(): # this callback employs the calculation methods and cre
     Wounds = calculation.calculateWounds(Hits, str, toughness)
     print("Number of succesfull saves:", calculation.calculateSaveType(Wounds, armor, invu, ap))
     savesMade = calculation.calculateSaveType(Wounds, armor, invu, ap)
+    print("Initial damage:", calculation.calculateDamage(Wounds, damage, savesMade))
+    damageDone = calculation.calculateDamage(Wounds, damage, savesMade)
+    print("After FnP:", calculation.calculateFNP(damageDone, fnp))
 
 
 

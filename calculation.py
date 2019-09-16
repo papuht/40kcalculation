@@ -80,9 +80,30 @@ def calculateSaveType(numofWounds, armor, invu, ap):
 		
 	return saves
 	
-	
-	
 
+def calculateDamage(numofWounds, damage, saves):
+    tempoutcome = float(damage * (numofWounds - saves))
+    
+    return tempoutcome
+	
+def calculateFNP(tempoutcome, fnp):
+    if fnp <= 1:
+        chanceToNull = 0
+    elif fnp == 2:
+        chanceToNull = float(5/6)
+    elif fnp == 3:
+        chanceToNull = float(2/3)
+    elif fnp == 4:
+        chanceToNull = float(1/2)
+    elif fnp == 5: 
+        chanceToNull = float(1/3)
+    elif fnp == 6:
+        chanceToNull = float(1/6)
+    
+    
+    finalResult = float(tempoutcome * chanceToNull)
+        
+    return finalResult
 	
 	
 	
