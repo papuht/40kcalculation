@@ -1,4 +1,4 @@
-
+#this file has all the functions to calculate the results 
 
 def calculateHits(bs, attacks, amodels):
     if bs <= 2:
