@@ -1,6 +1,6 @@
 #this file has all the functions to calculate the results 
 
-def calculateHits(bs, attacks, amodels):
+def calculateHits(bs, attacks, amodels, rerollHit):
     if bs <= 2:
         chanceToHit = float(5/6)
     elif bs == 3:
@@ -15,16 +15,31 @@ def calculateHits(bs, attacks, amodels):
         chanceToHit = float(0)
 
     numberOfHits = float(attacks * amodels * chanceToHit)
-            
-    return numberOfHits
+    misses = float((attacks * amodels) - numberOfHits)
+    
+    if rerollHit == 1:
+        totalHits = float(numberOfHits + (misses*chanceToHit*float(1/6)))
+    elif rerollHit == 2:
+        totalHits = float(numberOfHits + (misses * chanceToHit))
+    elif rerollHit == 3:
+        totalHits = numberOfHits
+    return totalHits
                    
     
-def calculateWounds(numofhits, str, tough):
+def calculateWounds(numofhits, str, tough, rerollWound):
     if str == tough:
         chanceToWound = float(1/2)
-    elif (str - tough) == 1:
+    elif str - tough == 1:
         chanceToWound = float(2/3)
-    elif (str - tough) == -1:
+    elif str - tough == 2:
+        chanceToWound = float(2/3)
+    elif str - tough == 3:
+        chanceToWound = float(2/3)
+    elif str - tough == -1:
+        chanceToWound = float(1/3)
+    elif str - tough == -2:
+        chanceToWound = float(1/3)
+    elif str - tough == -3:
         chanceToWound = float(1/3)
     elif str >= (2*tough): 
         chanceToWound = float(5/6)
@@ -32,8 +47,16 @@ def calculateWounds(numofhits, str, tough):
         chanceToWound = float(1/6)
         
     numberOfWounds = float(numofhits * chanceToWound)
+    fails = float(numofhits - numberOfWounds)
+    
+    if rerollWound == 1:
+        totalWounds = float(numberOfWounds + (fails*chanceToWound*float(1/6)))
+    elif rerollWound == 2: 
+        totalWounds = float(numberOfWounds + (fails * chanceToWound))
+    elif rerollWound == 3:
+        totalWounds = numberOfWounds
      
-    return numberOfWounds
+    return totalWounds
 
 def normalSave(numofWounds, armor, ap):
 		if (armor + ap) <= 2:
@@ -80,9 +103,30 @@ def calculateSaveType(numofWounds, armor, invu, ap):
 		
 	return saves
 	
-	
-	
 
+def calculateDamage(numofWounds, damage, saves):
+    tempoutcome = float(damage * (numofWounds - saves))
+    
+    return tempoutcome
+	
+def calculateFNP(tempoutcome, fnp):
+    if fnp <= 1:
+        chanceToNull = 1
+    elif fnp == 2:
+        chanceToNull = float(1/6)
+    elif fnp == 3:
+        chanceToNull = float(1/3)
+    elif fnp == 4:
+        chanceToNull = float(1/2)
+    elif fnp == 5: 
+        chanceToNull = float(2/3)
+    elif fnp == 6:
+        chanceToNull = float(5/6)
+    
+    
+    finalResult = float(tempoutcome * chanceToNull)
+        
+    return finalResult
 	
 	
 	
