@@ -18,7 +18,7 @@ def calculateHits(bs, attacks, amodels, rerollHit):
     misses = float((attacks * amodels) - numberOfHits)
     
     if rerollHit == 1:
-        totalHits = float(numberOfHits + (misses*float(1/6)))
+        totalHits = float(numberOfHits + (misses*chanceToHit*float(1/6)))
     elif rerollHit == 2:
         totalHits = float(numberOfHits + (misses * chanceToHit))
     elif rerollHit == 3:
@@ -33,9 +33,13 @@ def calculateWounds(numofhits, str, tough, rerollWound):
         chanceToWound = float(2/3)
     elif str - tough == 2:
         chanceToWound = float(2/3)
+    elif str - tough == 3:
+        chanceToWound = float(2/3)
     elif str - tough == -1:
         chanceToWound = float(1/3)
     elif str - tough == -2:
+        chanceToWound = float(1/3)
+    elif str - tough == -3:
         chanceToWound = float(1/3)
     elif str >= (2*tough): 
         chanceToWound = float(5/6)
@@ -46,7 +50,7 @@ def calculateWounds(numofhits, str, tough, rerollWound):
     fails = float(numofhits - numberOfWounds)
     
     if rerollWound == 1:
-        totalWounds = float(numberOfWounds + (fails*float(1/6)))
+        totalWounds = float(numberOfWounds + (fails*chanceToWound*float(1/6)))
     elif rerollWound == 2: 
         totalWounds = float(numberOfWounds + (fails * chanceToWound))
     elif rerollWound == 3:
@@ -107,17 +111,17 @@ def calculateDamage(numofWounds, damage, saves):
 	
 def calculateFNP(tempoutcome, fnp):
     if fnp <= 1:
-        chanceToNull = 0
+        chanceToNull = 1
     elif fnp == 2:
-        chanceToNull = float(5/6)
+        chanceToNull = float(1/6)
     elif fnp == 3:
-        chanceToNull = float(2/3)
+        chanceToNull = float(1/3)
     elif fnp == 4:
         chanceToNull = float(1/2)
     elif fnp == 5: 
-        chanceToNull = float(1/3)
+        chanceToNull = float(2/3)
     elif fnp == 6:
-        chanceToNull = float(1/6)
+        chanceToNull = float(5/6)
     
     
     finalResult = float(tempoutcome * chanceToNull)
