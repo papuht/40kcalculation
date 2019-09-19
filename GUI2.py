@@ -15,7 +15,9 @@ labels2 = ["Weapon name", "Damage", "Strength", "Model count", "Armor piercing",
 labels3 = ["Print unit data", "Print attack data", "Calculate result"]
 labels4 = ["Re-roll to hit 1's", "Re-roll to hit all", "No to hit re-rolls"]
 labels5 = ["Re-roll to wound 1's", "Re-roll to wound all", "No to wound re-rolls"]
-labels6 = ["Poison attack"]
+labels6 = ["Poison attack 2+", "Poison attack 4+", "No poison attack"]
+labels7 = ["Target is vehicle", "Target is monster", "Target is infantry", "Target is flyer", "Target is character"]
+labels8 = ["-3 AP on 6's to-hit", "No AP bonus"]
 
 r = 0
 for label in labels1:
@@ -30,6 +32,7 @@ dmcVar = tk.StringVar()
 asVar = tk.StringVar()
 isVar = tk.StringVar()
 fnpVar = tk.StringVar()
+typeVar = tk.IntVar()
 
 unameEntry = tk.Entry(textvariable = unameVar).grid(row = 0, column = 1)
 woundEntry = tk.Entry(textvariable = woundVar).grid(row = 1, column = 1)
@@ -56,6 +59,7 @@ bsVar = tk.StringVar()
 poisonVar = tk.IntVar()
 var = tk.IntVar()
 var1 = tk.IntVar()
+rendVar = tk.IntVar()
 
 wnameEntry = tk.Entry(textvariable = wnameVar).grid(row = 0, column = 3)
 damaEntry = tk.Entry(textvariable = damaVar).grid(row = 1, column = 3)
@@ -75,6 +79,7 @@ def calculateButtonCB(): # this callback employs the calculation methods and cre
     armor = float(asVar.get())
     invu = float(isVar.get())
     fnp = float(fnpVar.get())
+    type = typeVar.get()
     
     #defender = defender.DefendingUnit(defendName, wounds, toughness, dmc, armor, invu, fnp)  # asetettu kommenteiksi jotta ei tekisi vielä mitään
 
@@ -89,6 +94,7 @@ def calculateButtonCB(): # this callback employs the calculation methods and cre
     poison = poisonVar.get()
     rerollHit = var.get()
     rerollWound = var1.get()
+    rending = rendVar.get()
     
     
      
@@ -130,10 +136,31 @@ for label in labels5:
     value2 = value2 +1
     r5 = r5 +1
 
-# checkbutton to mark attack as poisoned     
-   
-tk.Checkbutton(text = "Poison attack", variable = poisonVar, onvalue = 1, offvalue = 0).grid(row = 8, column = 3)  
-calculateButton = tk.Button(text = "Calculate hits", command = calculateButtonCB).grid(row = 11, column = 1)
+# radiobutton to mark attack as poisoned     
+
+r6 = 0
+value3 = 1
+for label in labels6:
+    tk.Radiobutton(text = label, variable = poisonVar, value = value3).grid(row = 9, column = r6)
+    value3 = value3 +1
+    r6 = r6 +1
+
+r7 = 0
+value4 = 1
+for label in labels7:
+        tk.Radiobutton(text = label, variable = typeVar, value = value4).grid(row = 10, column = r7)
+        value4 = value4 +1
+        r7 = r7+1
+        
+r8 = 0
+value5 = 1
+for label in labels8:
+    tk.Radiobutton(text = label, variable = rendVar, value = value5).grid(row = 11, column = r8)
+    value5 = value5 +1
+    r8 = r8 +1
+
+
+calculateButton = tk.Button(text = "Calculate hits", command = calculateButtonCB).grid(row = 12, column = 1)
 
 
 
