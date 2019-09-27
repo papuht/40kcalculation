@@ -18,6 +18,7 @@ labels5 = ["Re-roll to wound 1's", "Re-roll to wound all", "No to wound re-rolls
 labels6 = ["Poison attack 2+", "Poison attack 4+", "No poison attack"]
 labels7 = ["Target is vehicle", "Target is monster", "Target is infantry", "Target is flyer", "Target is character"]
 labels8 = ["-3 AP on 6's to-hit", "-4 AP on 6's to-hit", "-6 AP on 6's to-hit", "No AP bonus"]
+labels9 = ["Auto wounds on hit"] 
 
 r = 0
 for label in labels1:
@@ -159,9 +160,14 @@ for label in labels8:
     value5 = value5 +1
     r8 = r8 +1
 
+r9 = 0
+value6 = 1
+for label in labels9:
+    tk.Radiobutton(text = label, value = value6).grid(row = 12, column = r9) 
 
-calculateButton = tk.Button(text = "Calculate hits", command = calculateButtonCB).grid(row = 12, column = 0)
-saveButton = tk.Button(text = "Save info").grid(row=12, column = 1)
-loadButton = tk.Button(text = "Load from database").grid(row = 12, column = 2)
+
+calculateButton = tk.Button(text = "Calculate hits", command = calculateButtonCB).grid(row = 13, column = 0)
+saveButton = tk.Button(text = "Save info").grid(row=13, column = 1)
+loadButton = tk.Button(text = "Load from database").grid(row = 13, column = 2)
 
 root.mainloop()
