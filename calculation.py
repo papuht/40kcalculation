@@ -1,6 +1,8 @@
 #this file has all the functions to calculate the results 
 
 def calculateHits(bs, attacks, amodels, rerollHit):
+    
+    	
     if bs <= 2:
         chanceToHit = float(5/6)
     elif bs == 3:
