@@ -1,9 +1,14 @@
 import tkinter as tk
 
 
+
+def openUnitInsert():
+    import unitInsertGUI as uiGUI
+    
+    
+
 top = tk.Tk()
 top.title("Cheat spirit")
-
 
 menubar = tk.Menu(top)
 
@@ -12,7 +17,7 @@ file = tk.Menu(menubar, tearoff = 0)
 
 
 insert = tk.Menu(file, tearoff = 0)
-insert.add_command(label = "Insert units")
+insert.add_command(label = "Insert units", command = openUnitInsert)
 insert.add_command(label = "Insert melee weapons")
 insert.add_command(label = "Insert ranged weapons")
 insert.add_command(label = "Insert factions")

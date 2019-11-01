@@ -113,8 +113,7 @@ def saveInfoButton():
 	
 saveButton = tk.Button(text = "Save info", command = saveInfoButton).grid(row=23, column = 1)
 
-def drive():
-	root.mainloop()
+
 
 	
 
