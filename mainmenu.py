@@ -1,6 +1,10 @@
 import tkinter as tk
 
+
 top = tk.Tk()
+top.title("Cheat spirit")
+
+
 menubar = tk.Menu(top)
 
 file = tk.Menu(menubar, tearoff = 0)
@@ -27,6 +31,10 @@ file.add_command(label = "Calculate results")
 file.add_separator()
 file.add_command(label = "Exitus", command = top.quit)
 
-menubar.add_cascade(label="File", menu=file) 
+menubar.add_cascade(label="File", menu=file)
+
+
+
+ 
 top.config(menu = menubar)
 top.mainloop()  
