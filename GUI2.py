@@ -10,7 +10,7 @@ root = tk.Tk()
 
 # strings for different fields of data
 
-labels1 = ["Unit name", "Move", "WS", "BS", "Wounds", "Strength", "Toughness", "Model count", "Leadership", "Armor save", "Inv. save", "FnP", "Faction", "Points"]
+labels1 = ["Unit name", "Move", "WS", "BS", "Wounds", "Strength", "Toughness", "Attacks", "Model count", "Leadership", "Armor save", "Inv. save", "FnP", "Faction", "Points"]
 labels2 = ["Weapon name", "Damage", "Strength", "Model count", "Armor piercing", "No. of attacks", "Ballistic skill"]
 labels3 = ["Print unit data", "Print attack data", "Calculate result"]
 labels4 = ["Re-roll to hit 1's", "Re-roll to hit all", "No to hit re-rolls"]
@@ -34,8 +34,9 @@ ldVar = tk.StringVar()
 warLordVar = tk.IntVar()
 factionVar = tk.StringVar()
 woundVar = tk.StringVar()
-strVar = tk.StringVar()
+strengthVar = tk.StringVar()
 toughVar = tk.StringVar()
+attackVar = tk.StringVar()
 dmcVar = tk.StringVar()
 asVar = tk.StringVar()
 isVar = tk.StringVar()
@@ -59,31 +60,34 @@ bsEntry = tk.Entry(textvariable = bsVar).grid(row = 3, column = 1)
 woundEntry = tk.Entry(textvariable = woundVar).grid(row = 4, column = 1)
 
 #strength
-strEntry = tk.Entry(textvariable = strVar).grid(row = 5, column = 1)
+strEntry = tk.Entry(textvariable = strengthVar).grid(row = 5, column = 1)
 
 #toughness 
 toughEntry =tk.Entry(textvariable = toughVar).grid(row = 6, column = 1)
 
+#attacks
+attacksEntry = tk.Entry(textvariable = attackVar).grid(row = 7, column = 1)
+
 #model count
-dmcEntry =tk.Entry(textvariable = dmcVar).grid(row = 7, column = 1)
+dmcEntry =tk.Entry(textvariable = dmcVar).grid(row = 8, column = 1)
 
 #Leadership
-ldEntry = tk.Entry(textvariable = ldVar).grid(row = 8, column = 1)
+ldEntry = tk.Entry(textvariable = ldVar).grid(row = 9, column = 1)
 
 #armor
-asEntry =tk.Entry(textvariable = asVar).grid(row = 9, column = 1)
+asEntry =tk.Entry(textvariable = asVar).grid(row = 10, column = 1)
 
 #invu save
-isEntry = tk.Entry(textvariable = isVar).grid(row = 10, column = 1)
+isEntry = tk.Entry(textvariable = isVar).grid(row = 11, column = 1)
 
 #fnp
-fnpEntry = tk.Entry(textvariable = fnpVar).grid(row = 11, column = 1)
+fnpEntry = tk.Entry(textvariable = fnpVar).grid(row = 12, column = 1)
 
 #faction
-factionEntry = tk.Entry(textvariable = factionVar).grid(row = 12, column = 1)
+factionEntry = tk.Entry(textvariable = factionVar).grid(row = 13, column = 1)
 
 #points
-pointsEntry = tk.Entry(textvariable = pointsVar).grid(row = 13, column = 1) 
+pointsEntry = tk.Entry(textvariable = pointsVar).grid(row = 14, column = 1) 
 
 
 r2 = 0    
@@ -125,6 +129,7 @@ def calculateButtonCB(): # this callback employs the calculation methods and cre
     invu = float(isVar.get())
     fnp = float(fnpVar.get())
     type = typeVar.get()
+	
     
     #defender = defender.DefendingUnit(defendName, wounds, toughness, dmc, armor, invu, fnp)  # asetettu kommenteiksi jotta ei tekisi vielä mitään
 
@@ -160,6 +165,31 @@ def calculateButtonCB(): # this callback employs the calculation methods and cre
     print("After FnP:", calculation.calculateFNP(damageDone, fnp))
 
 
+
+def saveInfoButton():
+	
+    defendName = unameVar.get()
+    wounds = float(woundVar.get())
+    toughness = float(toughVar.get())
+    dmc = float(dmcVar.get())
+    armor = float(asVar.get())
+    invu = float(isVar.get())
+    fnp = float(fnpVar.get())
+    type = typeVar.get()
+    warlord = warLordVar.get()
+    str = float(strengthVar.get())
+    move = float(moveVar.get())
+    attacks = float(attackVar.get())
+    faction = factionVar.get()
+    ws = float(wsVar.get())
+    bs = float(bsVar.get())
+    points = float(pointsVar.get())
+    ld = float(ldVar.get())
+	
+	
+
+
+    dbc.inserter(name, move, ws, bs, str, toughness, wounds, attacks, ld, armor, invu, fnp, type, faction, warlord) 
     
 
 
@@ -219,7 +249,7 @@ for label in labels10:
 
 
 calculateButton = tk.Button(text = "Calculate hits", command = calculateButtonCB).grid(row = 22, column = 0)
-saveButton = tk.Button(text = "Save info").grid(row=22, column = 1)
+saveButton = tk.Button(text = "Save info", command = saveInfoButton).grid(row=22, column = 1)
 loadButton = tk.Button(text = "Load from database").grid(row = 22, column = 2)
 
 root.mainloop()
