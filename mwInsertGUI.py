@@ -1,7 +1,6 @@
 import tkinter as tk
 import dbconnector as dbc
 
-root = tk.Tk()
 labels1 = ["MW name", "Strength", "Damage", "AP", "Points"]
 
 r = 0
@@ -18,7 +17,7 @@ pointsVar = tk.StringVar()
 
 
 #name
-wnameEntry = tk.Entry(textvariable = unameVar).grid(row = 0, column = 1)
+wnameEntry = tk.Entry(textvariable = wnameVar).grid(row = 0, column = 1)
 
 #Strength
 strEntry = tk.Entry(textvariable = strengthVar).grid(row = 1, column = 1)
@@ -36,14 +35,14 @@ pointsEntry = tk.Entry(textvariable = pointsVar).grid(row = 4, column = 1)
 def saveInfoButton():
 	
     weaponName = wnameVar.get()
-    strength = float(strengthVar.get())
-    damage = float(damageVar.get())
+    strength = strengthVar.get()
+    damage = damageVar.get()
     ap = float(apVar.get())
     points = float(pointsVar.get())
 
 
 
-    dbc.mw_inserter(name, str, d, ap, pts) 
+    dbc.melee_weapon_inserter(weaponName, strength, damage, ap, points) 
 	
 	
 	
