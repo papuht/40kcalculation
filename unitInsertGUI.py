@@ -117,7 +117,7 @@ def saveInfoButton():
 	
 
 
-    dbc.inserter(defendName, move, ws, bs, str, toughness, wounds, attacks, ld, armor, invu, fnp, type, faction, warlord, points, min, max) 
+    dbc.unit_inserter(defendName, move, ws, bs, str, toughness, wounds, attacks, ld, armor, invu, fnp, type, faction, warlord, points, min, max) 
 	
 	
 	
