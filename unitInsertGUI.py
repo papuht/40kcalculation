@@ -2,7 +2,7 @@ import tkinter as tk
 import dbconnector as dbc
 
 root = tk.Tk()
-labels1 = ["Unit name", "Move", "WS", "BS", "Wounds", "Strength", "Toughness", "Attacks", "Model count", "Leadership", "Armor save", "Inv. save", "FnP", "Faction", "Points"]
+labels1 = ["Unit name", "Move", "WS", "BS", "Wounds", "Strength", "Toughness", "Attacks", "Model count", "Leadership", "Armor save", "Inv. save", "FnP", "Faction", "Points", "Min # of models", "Max # of models"]
 
 labels10 = ["Is Warlord", "Not Warlord"]
 
@@ -29,6 +29,8 @@ isVar = tk.StringVar()
 fnpVar = tk.StringVar()
 typeVar = tk.IntVar()
 pointsVar = tk.StringVar()
+minVar = tk.StringVar()
+maxVar = tk.StringVar()
 
 #name
 unameEntry = tk.Entry(textvariable = unameVar).grid(row = 0, column = 1)
@@ -75,6 +77,12 @@ factionEntry = tk.Entry(textvariable = factionVar).grid(row = 13, column = 1)
 #points
 pointsEntry = tk.Entry(textvariable = pointsVar).grid(row = 14, column = 1)
 
+#min number of models 
+minEntry = tk.Entry(textvariable = minVar).grid(row = 15, column =1)
+
+#max number of models 
+maxEntry = tk.Entry(textvariable = maxVar).grid(row = 16, column = 1)
+
 
 r2 = 0
 value = 1
@@ -101,13 +109,15 @@ def saveInfoButton():
     bs = float(ballisVar.get())
     points = int(pointsVar.get())
     ld = float(ldVar.get())
+    min = int(minVar.get())
+    max = int(maxVar.get())
 	
 	#model count, does not go in to same db table
     dmc = dmcVar.get()
 	
 
 
-    dbc.inserter(defendName, move, ws, bs, str, toughness, wounds, attacks, ld, armor, invu, fnp, type, faction, warlord, points) 
+    dbc.inserter(defendName, move, ws, bs, str, toughness, wounds, attacks, ld, armor, invu, fnp, type, faction, warlord, points, min, max) 
 	
 	
 	
